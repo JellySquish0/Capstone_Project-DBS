@@ -1,13 +1,45 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 import Analyze from "./pages/Analyze";
+
+const ProtectedRoute = ({ children }) => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  return isLoggedIn ? children : <Navigate to="/" />;
+};
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/analyze" element={<Analyze />} />
+
+        <Route path="/" element={<Login />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/analysis"
+          element={
+            <ProtectedRoute>
+              <Analyze />
+            </ProtectedRoute>
+          }
+        />
+
       </Routes>
     </BrowserRouter>
   );
