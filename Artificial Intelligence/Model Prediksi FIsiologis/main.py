@@ -3,8 +3,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 from imblearn.over_sampling import SMOTE
+import joblib
 
-df = pd.read_csv('C:/Users/Farel/Documents/Farel/DBS Foundation/Capstone Project/data/healthcare-dataset-stroke-data.csv')
+df = pd.read_csv('healthcare-dataset-stroke-data.csv')
 data = df.copy()
 data.dropna(subset=['bmi'], inplace=True)
 data.drop(columns=['id'], errors='ignore', inplace=True)
@@ -53,3 +54,50 @@ print(tabel_df)
 
 print("\nLaporan Detail (Classification Report):")
 print(classification_report(y_test, y_pred))
+
+# Proses Inference
+print("\n--- Berikut adalah proses inference Random Forest ---")
+
+load_model = joblib.load('model_stroke_risk.pkl')
+load_kolom = joblib.load('kolom_training.pkl') # Load the training columns
+
+data_baru = pd.DataFrame({
+    'gender': ["Male"], # Sesuaikan dengan kategori di dataset asli
+    'age': [67],
+    'hypertension': [1],
+    'heart_disease': [1],
+    'ever_married': ["Yes"],
+    'work_type': ["Private"],
+    'Residence_type': ["Urban"],
+    'avg_glucose_level': [228.69],
+    'bmi': [36.6],
+    'smoking_status': ["formerly smoked"]
+})
+
+
+data_baru_processed = pd.get_dummies(data_baru, drop_first=True)
+
+# Tambahkan Missing Colume jika ada
+missing_cols = set(load_kolom) - set(data_baru_processed.columns)
+for c in missing_cols:
+    data_baru_processed[c] = 0
+
+data_baru_processed = data_baru_processed[load_kolom] 
+prediksi = load_model.predict(data_baru_processed)
+probabilitas = load_model.predict_proba(data_baru_processed)
+kelas = load_model.classes_
+
+print(f"Hasil Klasifikasi : {prediksi[0]}")
+print("\n Detail Probabilitas: ")
+
+for i, label in enumerate(kelas):
+    persen = probabilitas[0][i] * 100
+    print(f"- {label:<12}: {persen:>6.2f}%")
+
+# Memberikan rekomendasi sederhana berdasarkan hasil
+if prediksi[0] == 'High Risk':
+    print("\nREKOMENDASI: Segera konsultasi dengan dokter spesialis.")
+elif prediksi[0] == 'Caution':
+    print("\nREKOMENDASI: Perbaiki pola makan dan cek tekanan darah rutin.")
+else:
+    print("\nREKOMENDASI: Pertahankan gaya hidup sehat Anda!")
