@@ -1,1 +1,4 @@
-
+X_train.npy : https://drive.google.com/file/d/19v4x4YRA6ZCt2p43VSMoAIvjuVkgnZBZ/view?usp=drive_link
+X_test.npy : https://drive.google.com/file/d/1GPB1P7OPdIiLTWPfy8jKjBVw9E8uPnVz/view?usp=drive_link
+y_train.npy : https://drive.google.com/file/d/11JiV20JKiwP7Kii-R6rBQ1tVM8MdWl_v/view?usp=drive_link
+y_test.npy : https://drive.google.com/file/d/1yoRAqKTN2d3_snYW7aM6qRBtnkIitd0F/view?usp=drive_link
