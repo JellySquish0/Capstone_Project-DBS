@@ -15,11 +15,7 @@ import { errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
 
-
-// ======================
 // MIDDLEWARE
-// ======================
-
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -51,36 +47,20 @@ app.use(
   })
 );
 
-
-// ======================
 // STATIC FILES
-// ======================
-
 app.use("/uploads", express.static("uploads"));
 
-
-// ======================
 // ROUTES
-// ======================
-
 app.use("/api/auth", authRoutes);
 
 app.use("/api/detections", detectionRoutes);
 
-
-// ======================
 // TEST SERVER
-// ======================
-
 app.get("/", (req, res) => {
   res.send("Stroke API Running 🚀");
 });
 
-
-// ======================
 // TEST DATABASE
-// ======================
-
 app.get("/test-db", async (req, res) => {
 
   try {
@@ -99,18 +79,10 @@ app.get("/test-db", async (req, res) => {
 
 });
 
-
-// ======================
 // GLOBAL ERROR HANDLER
-// ======================
-
 app.use(errorHandler);
 
-
-// ======================
 // SERVER
-// ======================
-
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
