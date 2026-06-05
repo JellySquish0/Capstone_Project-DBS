@@ -57,7 +57,7 @@ app.use("/api/detections", detectionRoutes);
 
 // TEST SERVER
 app.get("/", (req, res) => {
-  res.send("Stroke API Running 🚀");
+  res.send("Stroke API Running");
 });
 
 // TEST DATABASE
