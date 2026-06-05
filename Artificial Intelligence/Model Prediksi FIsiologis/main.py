@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 from imblearn.over_sampling import SMOTE
 import joblib
+import os
 
 df = pd.read_csv('healthcare-dataset-stroke-data.csv')
 data = df.copy()
@@ -101,3 +102,15 @@ elif prediksi[0] == 'Caution':
     print("\nREKOMENDASI: Perbaiki pola makan dan cek tekanan darah rutin.")
 else:
     print("\nREKOMENDASI: Pertahankan gaya hidup sehat Anda!")
+
+folder_tujuan = 'model'
+os.makedirs(folder_tujuan, exist_ok=True)
+kolom_training = X_train_smote.columns.tolist()
+
+path_model = os.path.join(folder_tujuan, 'model_stroke_risk.pkl')
+path_kolom = os.path.join(folder_tujuan, 'kolom_training.pkl')
+
+joblib.dump(model, path_model)
+joblib.dump(kolom_training, path_kolom)
+
+print(f"Berhasil disimpan di folder: {folder_tujuan}/")
