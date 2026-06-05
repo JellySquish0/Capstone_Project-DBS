@@ -32,6 +32,16 @@
   color: #2563eb;
 }
 
+.active-link{
+  background:#e0ebff;
+  color:#2563eb;
+
+  padding:8px 14px;
+  border-radius:10px;
+
+  font-weight:700;
+}
+
 .logout-btn {
   background: #ef4444;
   color: white;
@@ -44,4 +54,64 @@
 
 .logout-btn:hover {
   background: #dc2626;
+}
+
+/* =====================
+   MOBILE
+===================== */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    height: auto;
+    padding: 15px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .navbar-logo {
+    font-size: 24px;
+  }
+
+  .navbar-menu {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .navbar-link {
+    font-size: 15px;
+  }
+
+  .logout-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .navbar{
+    flex-direction: column;
+    height: auto;
+
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .navbar-menu{
+    width: 100%;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .navbar-logo{
+    font-size: 24px;
+  }
+
 }

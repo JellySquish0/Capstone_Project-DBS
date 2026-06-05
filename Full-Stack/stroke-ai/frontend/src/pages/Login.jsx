@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/login.css";
+import { login } from "../services/authServices";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -8,9 +9,39 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-const handleLogin = () => {
-  localStorage.setItem("isLoggedIn", "true");
-  navigate("/dashboard");
+const handleLogin = async () => {
+
+  try {
+
+    const response =
+  await login(
+    email,
+    password
+  );
+
+localStorage.setItem(
+  "token",
+  response.token
+);
+
+localStorage.setItem(
+  "user",
+  JSON.stringify(
+    response.user
+  )
+);
+
+navigate("/dashboard");
+
+  } catch (error) {
+
+    alert(
+      error.response?.data?.message ||
+      "Login gagal"
+    );
+
+  }
+
 };
 
   return (
@@ -28,7 +59,7 @@ const handleLogin = () => {
           </h1>
 
           <p className="login-subtitle">
-            Masuk ke akun StrokeAI untuk mengakses dashboard dan hasil analisis.
+            Masuk ke akun NeuroFace untuk mengakses dashboard dan hasil analisis.
           </p>
 
           <input
@@ -55,8 +86,11 @@ const handleLogin = () => {
           </button>
 
           <p className="login-footer">
-            Demo Login StrokeAI
-          </p>
+  Belum punya akun?{" "}
+  <Link to="/register">
+    Daftar
+  </Link>
+</p>
 
         </div>
 

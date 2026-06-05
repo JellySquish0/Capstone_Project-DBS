@@ -6,22 +6,49 @@ import {
 } from "react-router-dom";
 
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Analyze from "./pages/Analyze";
+import Home from "./pages/Home";
 
 const ProtectedRoute = ({ children }) => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-  return isLoggedIn ? children : <Navigate to="/" />;
+  const token =
+    localStorage.getItem("token");
+
+  return token
+    ? children
+    : <Navigate to="/" />;
+
 };
 
 function App() {
   return (
     <BrowserRouter>
+
       <Routes>
 
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
 
+        {/* LOGIN */}
+        <Route
+          path="/"
+          element={<Login />}
+        />
+
+        {/* OPTIONAL LOGIN ROUTE */}
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        {/* REGISTER */}
+        <Route
+          path="/register"
+          element={<Register />}
+        />
+
+        {/* DASHBOARD */}
         <Route
           path="/dashboard"
           element={
@@ -31,6 +58,7 @@ function App() {
           }
         />
 
+        {/* ANALYSIS */}
         <Route
           path="/analysis"
           element={
@@ -41,6 +69,7 @@ function App() {
         />
 
       </Routes>
+
     </BrowserRouter>
   );
 }

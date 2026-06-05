@@ -2,23 +2,29 @@ export default function StepIndicator() {
   return (
     <div className="steps">
 
-      <div className="step active">
+      <div className="step">
         <div className="circle">1</div>
-        <span>Data Pasien</span>
+        <div className="step-label">
+          Data Pasien
+        </div>
       </div>
 
-      <div className="line"></div>
+      <div className="step-line"></div>
 
-      <div className="step active">
+      <div className="step">
         <div className="circle">2</div>
-        <span>Foto Wajah</span>
+        <div className="step-label">
+          Foto Wajah
+        </div>
       </div>
 
-      <div className="line"></div>
+      <div className="step-line"></div>
 
       <div className="step">
         <div className="circle">3</div>
-        <span>Hasil</span>
+        <div className="step-label">
+          Hasil Analisis
+        </div>
       </div>
 
     </div>

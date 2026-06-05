@@ -5,19 +5,23 @@ export default function Dashboard() {
     <div
       style={{
         width: "100%",
-        height: "100vh",
-        overflow: "hidden"
+        minHeight: "100vh",
+        background: "#eef4ff",
+        padding: "40px 20px 80px"
       }}
     >
       <Navbar />
 
       <iframe
-        src="http://localhost:8501"
+        src="https://dashboard-production-d32f.up.railway.app"
         title="Stroke Dashboard"
         style={{
           width: "100%",
-          height: "calc(100vh - 70px)",
-          border: "none"
+          height: "calc(100vh - 140px)",
+          border: "none",
+          borderRadius: "18px",
+          marginTop: "20px",
+          background: "white"
         }}
       />
     </div>
